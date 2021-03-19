@@ -1,80 +1,100 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
+import 'package:hello_world/MockAuthRepository.dart';
+import 'dart:math';
+import 'dart:async';
 
 class HomePage extends StatelessWidget {
-@override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text ('Veaver')
+        title: Text('Veaver'),
       ),
-      //body: SingleChildScrollView (
-       // scrollDirection: axis.vertical,
-        //child: Column(children: [
-         // TaskWidget(),
-
-
-        );
-        
-
-
-        
-        
-        
-
-    
-  }
-
-  Class TaskWidget extends StatelessWidget {
-    @override
-    Widget build(BuildContext context) {
-      return Column(
+      body: Column(
         children: [
-          Text('Video'),
-          Text('Podcast'),
-          Text('Blog'),
-          Row(children: [
-             
-
-          ],)
-        ],
-      );
-    }
-  } 
-
-class StoryWidget extends StatelessWidget {
-  final Axis direction;
-
-  StoryWidget({
-    required this.direction,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Discovery',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ),
-        SizedBox(height: 24),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Flex(
-            direction: direction,
-            mainAxisSize: MainAxisSize.max,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              
+              ElevatedButton(
+                child: Text('Video'),
+                onPressed: () {},
+              ),
+              ElevatedButton(
+                child: Text('Podcast'),
+                onPressed: () {},
+              ),
+              ElevatedButton(
+                child: Text('Blog'),
+                onPressed: () {},
+              ),
             ],
           ),
-        ),
-      ],
+          Row(
+            children: [
+              Column(
+                children: [
+                  SizedBox(
+                    height: 50,
+                    width: 100,
+                    child: Text(
+                      'Event one',
+                    ),
+                  ),
+                  SizedBox(
+                    height: 50,
+                    width: 100,
+                    child: Text(
+                      'Event one',
+                    ),
+                  ),
+                  SizedBox(
+                    height: 50,
+                    width: 100,
+                    child: Text(
+                      'Event one',
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  Stack(
+                    children: [
+                      Stack(
+                        children: [
+                          Container(
+                            alignment: Alignment.topLeft,
+                            child: Text('Current '),
+                            color: Colors.blue,
+                            height: 200,
+                            width: 800,
+                          ),
+                          ElevatedButton(
+                            child: Text('Should we eat meat?'),
+                            onPressed: () {},
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Container(
+                    child: Text('Backlog '),
+                    color: Colors.yellow,
+                    height: 200,
+                    width: 800,
+                  ),
+                  Container(
+                    child: Text('Library '),
+                    color: Colors.red,
+                    height: 200,
+                    width: 800,
+                  ),
+                ],
+              )
+            ],
+          )
+        ],
+      ),
     );
   }
 }
-
-
-
-  }
