@@ -16,3 +16,5 @@ abstract class AuthState with _$AuthState {
     required User user,
   }) = _Authenticated;
 }
+
+//fuck you

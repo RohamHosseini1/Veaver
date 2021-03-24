@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:Veaver/Domain/Auth/Auth_failure.dart';
-import 'package:hello_world/infrastructure/auth/mock_auth_service.dart';
+import 'package:hello_world/Domain/Auth/Auth_faliure.dart';
+import 'package:hello_world/infraustructure/auth/mock_auth_service.dart';
 
 import 'user.dart';
 
@@ -13,7 +13,10 @@ class AuthRepo {
   Future<Either<AuthFailure, User>> login() async {
     try {
       final result = await authService.login();
-      return right(User(id: result['userid'], userName: result['username']));
+      return right(User(
+          id: result['userid'],
+          username: result['username'],
+          teamname: result['teamname']));
     } catch (_) {
       print('error happened');
       return left(GeneralAuthFailure());
