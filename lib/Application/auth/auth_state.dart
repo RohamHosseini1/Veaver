@@ -17,4 +17,4 @@ abstract class AuthState with _$AuthState {
   }) = _Authenticated;
 }
 
-//fuck you
+//fuck you stupid ass code

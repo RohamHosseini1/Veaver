@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:hello_world/application/auth/auth_bloc.dart';
 import 'package:yeet/yeet.dart';
+import 'package:hello_world/common/VeaverColors.dart';
 
 class AuthView extends HookWidget {
   @override
@@ -64,7 +65,7 @@ class AuthView extends HookWidget {
                       },
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.resolveWith(
-                          (_) => HSColors.mainColor,
+                          (_) => VeaverColors.mainColor,
                         ),
                       ),
                       child: Text('Sign in'),
