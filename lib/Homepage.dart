@@ -134,8 +134,8 @@ class ProjectWidget extends StatelessWidget {
           children: [
             SizedBox(height: 16),
             Row(
-              children: [DatePickerWidget()],
-            ),
+                //children: ,
+                ),
             SizedBox(height: 16),
             Container(
               child: Text('Project title'),
