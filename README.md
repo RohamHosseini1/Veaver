@@ -1,7 +1,16 @@
-# Veaver
+# hello_world
 
-### A task management tool specifically tailored to content creators
+A new Flutter project.
 
-It allows them to add and manage individual projects (video, podcast episode, blog post), assign it to team members and update its status. 
+## Getting Started
 
-There is also a calendar feature to track the content timeline.
+This project is a starting point for a Flutter application.
+
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+
+For help getting started with Flutter, view our
+[online documentation](https://flutter.dev/docs), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
