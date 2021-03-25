@@ -6,7 +6,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yeet/yeet.dart';
 
-class HomePage extends StatelessWidget {
+import 'domain/project/project.dart';
+
+class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,12 +71,6 @@ class HomePage extends StatelessWidget {
                     height: 200,
                     width: 800,
                   ),
-                  Container(
-                    child: LibraryWidget(),
-                    color: Colors.black,
-                    height: 200,
-                    width: 800,
-                  ),
                 ],
               )
             ],
@@ -91,11 +87,11 @@ class LibraryWidget extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ProjectWidget(),
-          ProjectWidget(),
-          ProjectWidget(),
-          ProjectWidget(),
-          ProjectWidget(),
+          ProjectWidget(1),
+          ProjectWidget(2),
+          ProjectWidget(3),
+          ProjectWidget(4),
+          ProjectWidget(5),
         ],
       ),
     );
@@ -124,49 +120,67 @@ class LibraryWidget extends StatelessWidget {
 // }
 
 class ProjectWidget extends StatelessWidget {
+  final int id;
+
+  ProjectWidget(this.id);
+
   @override
   Widget build(BuildContext context) {
+    final project = Project(
+      id: id,
+      content: 'project #$id content',
+      title: 'project #$id',
+      status: ProjectStatus.todo,
+    );
     return Padding(
       padding: const EdgeInsets.all(5),
-      child: Card(
-        elevation: 5,
-        child: Column(
-          children: [
-            SizedBox(height: 16),
-            Row(
-                //children: ,
-                ),
-            SizedBox(height: 16),
-            Container(
-              child: Text('Project title'),
-              color: Colors.white,
-            ),
-            Row(
+      child: InkWell(
+        onTap: () {
+          context.yeet('/project/$id');
+        },
+        child: Hero(
+          tag: 'project $id',
+          child: Card(
+            elevation: 5,
+            child: Column(
               children: [
-                IconButton(
-                  icon: Icon(
-                    Icons.done_rounded,
-                    color: Colors.green,
-                  ),
-                  onPressed: () {},
+                SizedBox(height: 16),
+                Row(
+                    //children: ,
+                    ),
+                SizedBox(height: 16),
+                Container(
+                  child: Text(project.title),
+                  color: Colors.white,
                 ),
-                IconButton(
-                  icon: Icon(
-                    Icons.pause,
-                    color: Colors.yellow,
-                  ),
-                  onPressed: () {},
-                ),
-                IconButton(
-                  icon: Icon(
-                    Icons.delete_forever,
-                    color: Colors.red,
-                  ),
-                  onPressed: () {},
+                Row(
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        Icons.done_rounded,
+                        color: Colors.green,
+                      ),
+                      onPressed: () {},
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        Icons.pause,
+                        color: Colors.yellow,
+                      ),
+                      onPressed: () {},
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        Icons.delete_forever,
+                        color: Colors.red,
+                      ),
+                      onPressed: () {},
+                    ),
+                  ],
                 ),
               ],
             ),
-          ],
+          ),
         ),
       ),
     );

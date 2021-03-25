@@ -5,12 +5,14 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hello_world/homepage.dart';
+import 'package:hello_world/home_view.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yeet/yeet.dart';
 import 'package:provider/provider.dart';
 import 'package:hello_world/MockAuthRepository.dart';
+
+import 'domain/project/project.dart';
 
 enum DoneStatus {
   Done,
@@ -19,17 +21,17 @@ enum DoneStatus {
   none,
 }
 
-class Project {
-  int id;
+// class Project {
+//   int id;
 
-  DoneStatus doneStatus;
+//   DoneStatus doneStatus;
 
-  Project(
-    e, {
-    required this.id,
-    this.doneStatus = DoneStatus.none,
-  });
-}
+//   Project(
+//     e, {
+//     required this.id,
+//     this.doneStatus = DoneStatus.none,
+//   });
+// }
 
 abstract class ProjectRepository {
   Future<List<Project>> getAllProjects();
@@ -52,23 +54,23 @@ abstract class MockProjectRepository implements ProjectRepository {
     return project;
   }
 
-  @override
-  Future<bool> done(int id) async {
-    project[id].doneStatus = DoneStatus.Done;
-    return true;
-  }
+  // @override
+  // Future<bool> done(int id) async {
+  //   project[id].doneStatus = DoneStatus.Done;
+  //   return true;
+  // }
 
-  @override
-  Future<bool> pause(int id) async {
-    project[id].doneStatus = DoneStatus.Pause;
-    return true;
-  }
+  // @override
+  // Future<bool> pause(int id) async {
+  //   project[id].doneStatus = DoneStatus.Pause;
+  //   return true;
+  // }
 
-  @override
-  Future<bool> delete(int id) async {
-    project[id].doneStatus = DoneStatus.Delete;
-    return true;
-  }
+  // @override
+  // Future<bool> delete(int id) async {
+  //   project[id].doneStatus = DoneStatus.Delete;
+  //   return true;
+  // }
 
   @override
   Stream<List<Project>> watchAllProjects() async* {

@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hello_world/Domain/Auth/Auth_faliure.dart';
+import 'package:hello_world/Domain/Auth/auth_failure.dart';
 import 'package:hello_world/Domain/Auth/user.dart';
 
 part 'auth_state.freezed.dart';
@@ -17,4 +17,4 @@ abstract class AuthState with _$AuthState {
   }) = _Authenticated;
 }
 
-//fuck you stupid ass code
+// //fuck you stupid ass code
