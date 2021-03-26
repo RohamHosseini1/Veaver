@@ -16,12 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$UserTearOff {
   const _$UserTearOff();
 
-  _User call(
-      {required int id, required String username, required String teamname}) {
+  _User call({required String id}) {
     return _User(
       id: id,
-      username: username,
-      teamname: teamname,
     );
   }
 }
@@ -31,9 +28,7 @@ const $User = _$UserTearOff();
 
 /// @nodoc
 mixin _$User {
-  int get id => throw _privateConstructorUsedError;
-  String get username => throw _privateConstructorUsedError;
-  String get teamname => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
@@ -43,7 +38,7 @@ mixin _$User {
 abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res>;
-  $Res call({int id, String username, String teamname});
+  $Res call({String id});
 }
 
 /// @nodoc
@@ -57,21 +52,11 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
   @override
   $Res call({
     Object? id = freezed,
-    Object? username = freezed,
-    Object? teamname = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      username: username == freezed
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
-              as String,
-      teamname: teamname == freezed
-          ? _value.teamname
-          : teamname // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -82,7 +67,7 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$UserCopyWith(_User value, $Res Function(_User) then) =
       __$UserCopyWithImpl<$Res>;
   @override
-  $Res call({int id, String username, String teamname});
+  $Res call({String id});
 }
 
 /// @nodoc
@@ -97,21 +82,11 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? username = freezed,
-    Object? teamname = freezed,
   }) {
     return _then(_User(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      username: username == freezed
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
-              as String,
-      teamname: teamname == freezed
-          ? _value.teamname
-          : teamname // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -119,19 +94,14 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 
 /// @nodoc
 class _$_User with DiagnosticableTreeMixin implements _User {
-  const _$_User(
-      {required this.id, required this.username, required this.teamname});
+  const _$_User({required this.id});
 
   @override
-  final int id;
-  @override
-  final String username;
-  @override
-  final String teamname;
+  final String id;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User(id: $id, username: $username, teamname: $teamname)';
+    return 'User(id: $id)';
   }
 
   @override
@@ -139,9 +109,7 @@ class _$_User with DiagnosticableTreeMixin implements _User {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'User'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('username', username))
-      ..add(DiagnosticsProperty('teamname', teamname));
+      ..add(DiagnosticsProperty('id', id));
   }
 
   @override
@@ -149,21 +117,12 @@ class _$_User with DiagnosticableTreeMixin implements _User {
     return identical(this, other) ||
         (other is _User &&
             (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.username, username) ||
-                const DeepCollectionEquality()
-                    .equals(other.username, username)) &&
-            (identical(other.teamname, teamname) ||
-                const DeepCollectionEquality()
-                    .equals(other.teamname, teamname)));
+                const DeepCollectionEquality().equals(other.id, id)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(username) ^
-      const DeepCollectionEquality().hash(teamname);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(id);
 
   @JsonKey(ignore: true)
   @override
@@ -172,17 +131,10 @@ class _$_User with DiagnosticableTreeMixin implements _User {
 }
 
 abstract class _User implements User {
-  const factory _User(
-      {required int id,
-      required String username,
-      required String teamname}) = _$_User;
+  const factory _User({required String id}) = _$_User;
 
   @override
-  int get id => throw _privateConstructorUsedError;
-  @override
-  String get username => throw _privateConstructorUsedError;
-  @override
-  String get teamname => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$UserCopyWith<_User> get copyWith => throw _privateConstructorUsedError;

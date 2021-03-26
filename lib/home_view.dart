@@ -22,18 +22,19 @@ class HomeView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
-                    child: Padding(
-                      padding: EdgeInsets.all(20),
-                      child: Text('Video'),
-                    ),
+                    child: Text('Dashboard'),
                     onPressed: () {},
                   ),
                   ElevatedButton(
-                    child: Text('Podcast'),
+                    child: Text('Project Flow'),
                     onPressed: () {},
                   ),
                   ElevatedButton(
-                    child: Text('Blog'),
+                    child: Text('Content Calendar'),
+                    onPressed: () {},
+                  ),
+                  ElevatedButton(
+                    child: Text('Analytics'),
                     onPressed: () {},
                   ),
                 ],
