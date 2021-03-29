@@ -7,7 +7,7 @@ enum ProjectStatus { todo, doing, done }
 @freezed
 abstract class Project with _$Project {
   const factory Project({
-    required int id,
+    required String id,
     required String title,
     required String content,
     required ProjectStatus status,

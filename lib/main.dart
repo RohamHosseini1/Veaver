@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/home_view.dart';
-import 'package:hello_world/MockAuthRepository.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hello_world/presentation/project/project_view.dart';
 import 'package:yeet/yeet.dart';
+import 'package:hive/hive.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:hello_world/presentation/auth/auth_view.dart';
+import 'application/auth/auth_bloc.dart';
+import 'home_view.dart';
+import 'presentation/auth/auth_view.dart';
 
 void main() {
-  runApp(MyApp());
+  Hive.init('/hive');
+  runApp(ProviderScope(child: MyApp()));
 }
 
 final yeet = Yeet(
@@ -16,7 +22,7 @@ final yeet = Yeet(
       builder: (_, __) => HomeView(),
       children: [
         Yeet(
-          path: r'/project/:id(\d+)',
+          path: r'/project/:id',
           opaque: false,
           transitionsBuilder: (context, animation, secondaryAnimation, child) =>
               FadeTransition(
@@ -26,7 +32,7 @@ final yeet = Yeet(
           builder: (params, _) {
             print(params);
             return ProjectView(
-              int.parse(params['id']!),
+              params['id']!,
             );
           },
         ),

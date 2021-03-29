@@ -2,7 +2,7 @@ import 'dart:html';
 
 import 'package:dartz/dartz.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:hello_world/Domain/Auth/auth_failure.dart';
+import 'package:hello_world/domain/auth/auth_failure.dart';
 import 'package:hello_world/infrastructure/auth/Firebase_auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 

@@ -20,12 +20,6 @@ class _$AuthStateTearOff {
     return const _Unauthenticated();
   }
 
-  Failed failed({required AuthFailure failure}) {
-    return Failed(
-      failure: failure,
-    );
-  }
-
   Loading loading() {
     return const Loading();
   }
@@ -45,7 +39,6 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() unauthenticated,
-    required TResult Function(AuthFailure failure) failed,
     required TResult Function() loading,
     required TResult Function(User user) authenticated,
   }) =>
@@ -53,7 +46,6 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unauthenticated,
-    TResult Function(AuthFailure failure)? failed,
     TResult Function()? loading,
     TResult Function(User user)? authenticated,
     required TResult orElse(),
@@ -62,7 +54,6 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Unauthenticated value) unauthenticated,
-    required TResult Function(Failed value) failed,
     required TResult Function(Loading value) loading,
     required TResult Function(_Authenticated value) authenticated,
   }) =>
@@ -70,7 +61,6 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Unauthenticated value)? unauthenticated,
-    TResult Function(Failed value)? failed,
     TResult Function(Loading value)? loading,
     TResult Function(_Authenticated value)? authenticated,
     required TResult orElse(),
@@ -132,7 +122,6 @@ class _$_Unauthenticated implements _Unauthenticated {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() unauthenticated,
-    required TResult Function(AuthFailure failure) failed,
     required TResult Function() loading,
     required TResult Function(User user) authenticated,
   }) {
@@ -143,7 +132,6 @@ class _$_Unauthenticated implements _Unauthenticated {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unauthenticated,
-    TResult Function(AuthFailure failure)? failed,
     TResult Function()? loading,
     TResult Function(User user)? authenticated,
     required TResult orElse(),
@@ -158,7 +146,6 @@ class _$_Unauthenticated implements _Unauthenticated {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Unauthenticated value) unauthenticated,
-    required TResult Function(Failed value) failed,
     required TResult Function(Loading value) loading,
     required TResult Function(_Authenticated value) authenticated,
   }) {
@@ -169,7 +156,6 @@ class _$_Unauthenticated implements _Unauthenticated {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Unauthenticated value)? unauthenticated,
-    TResult Function(Failed value)? failed,
     TResult Function(Loading value)? loading,
     TResult Function(_Authenticated value)? authenticated,
     required TResult orElse(),
@@ -183,125 +169,6 @@ class _$_Unauthenticated implements _Unauthenticated {
 
 abstract class _Unauthenticated implements AuthState {
   const factory _Unauthenticated() = _$_Unauthenticated;
-}
-
-/// @nodoc
-abstract class $FailedCopyWith<$Res> {
-  factory $FailedCopyWith(Failed value, $Res Function(Failed) then) =
-      _$FailedCopyWithImpl<$Res>;
-  $Res call({AuthFailure failure});
-}
-
-/// @nodoc
-class _$FailedCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
-    implements $FailedCopyWith<$Res> {
-  _$FailedCopyWithImpl(Failed _value, $Res Function(Failed) _then)
-      : super(_value, (v) => _then(v as Failed));
-
-  @override
-  Failed get _value => super._value as Failed;
-
-  @override
-  $Res call({
-    Object? failure = freezed,
-  }) {
-    return _then(Failed(
-      failure: failure == freezed
-          ? _value.failure
-          : failure // ignore: cast_nullable_to_non_nullable
-              as AuthFailure,
-    ));
-  }
-}
-
-/// @nodoc
-class _$Failed implements Failed {
-  const _$Failed({required this.failure});
-
-  @override
-  final AuthFailure failure;
-
-  @override
-  String toString() {
-    return 'AuthState.failed(failure: $failure)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is Failed &&
-            (identical(other.failure, failure) ||
-                const DeepCollectionEquality().equals(other.failure, failure)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(failure);
-
-  @JsonKey(ignore: true)
-  @override
-  $FailedCopyWith<Failed> get copyWith =>
-      _$FailedCopyWithImpl<Failed>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() unauthenticated,
-    required TResult Function(AuthFailure failure) failed,
-    required TResult Function() loading,
-    required TResult Function(User user) authenticated,
-  }) {
-    return failed(failure);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? unauthenticated,
-    TResult Function(AuthFailure failure)? failed,
-    TResult Function()? loading,
-    TResult Function(User user)? authenticated,
-    required TResult orElse(),
-  }) {
-    if (failed != null) {
-      return failed(failure);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Unauthenticated value) unauthenticated,
-    required TResult Function(Failed value) failed,
-    required TResult Function(Loading value) loading,
-    required TResult Function(_Authenticated value) authenticated,
-  }) {
-    return failed(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Unauthenticated value)? unauthenticated,
-    TResult Function(Failed value)? failed,
-    TResult Function(Loading value)? loading,
-    TResult Function(_Authenticated value)? authenticated,
-    required TResult orElse(),
-  }) {
-    if (failed != null) {
-      return failed(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class Failed implements AuthState {
-  const factory Failed({required AuthFailure failure}) = _$Failed;
-
-  AuthFailure get failure => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $FailedCopyWith<Failed> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -341,7 +208,6 @@ class _$Loading implements Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() unauthenticated,
-    required TResult Function(AuthFailure failure) failed,
     required TResult Function() loading,
     required TResult Function(User user) authenticated,
   }) {
@@ -352,7 +218,6 @@ class _$Loading implements Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unauthenticated,
-    TResult Function(AuthFailure failure)? failed,
     TResult Function()? loading,
     TResult Function(User user)? authenticated,
     required TResult orElse(),
@@ -367,7 +232,6 @@ class _$Loading implements Loading {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Unauthenticated value) unauthenticated,
-    required TResult Function(Failed value) failed,
     required TResult Function(Loading value) loading,
     required TResult Function(_Authenticated value) authenticated,
   }) {
@@ -378,7 +242,6 @@ class _$Loading implements Loading {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Unauthenticated value)? unauthenticated,
-    TResult Function(Failed value)? failed,
     TResult Function(Loading value)? loading,
     TResult Function(_Authenticated value)? authenticated,
     required TResult orElse(),
@@ -400,6 +263,8 @@ abstract class _$AuthenticatedCopyWith<$Res> {
           _Authenticated value, $Res Function(_Authenticated) then) =
       __$AuthenticatedCopyWithImpl<$Res>;
   $Res call({User user});
+
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -422,6 +287,13 @@ class __$AuthenticatedCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
           : user // ignore: cast_nullable_to_non_nullable
               as User,
     ));
+  }
+
+  @override
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
   }
 }
 
@@ -458,7 +330,6 @@ class _$_Authenticated implements _Authenticated {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() unauthenticated,
-    required TResult Function(AuthFailure failure) failed,
     required TResult Function() loading,
     required TResult Function(User user) authenticated,
   }) {
@@ -469,7 +340,6 @@ class _$_Authenticated implements _Authenticated {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unauthenticated,
-    TResult Function(AuthFailure failure)? failed,
     TResult Function()? loading,
     TResult Function(User user)? authenticated,
     required TResult orElse(),
@@ -484,7 +354,6 @@ class _$_Authenticated implements _Authenticated {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Unauthenticated value) unauthenticated,
-    required TResult Function(Failed value) failed,
     required TResult Function(Loading value) loading,
     required TResult Function(_Authenticated value) authenticated,
   }) {
@@ -495,7 +364,6 @@ class _$_Authenticated implements _Authenticated {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Unauthenticated value)? unauthenticated,
-    TResult Function(Failed value)? failed,
     TResult Function(Loading value)? loading,
     TResult Function(_Authenticated value)? authenticated,
     required TResult orElse(),

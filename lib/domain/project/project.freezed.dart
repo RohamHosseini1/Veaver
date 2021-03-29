@@ -17,7 +17,7 @@ class _$ProjectTearOff {
   const _$ProjectTearOff();
 
   _Project call(
-      {required int id,
+      {required String id,
       required String title,
       required String content,
       required ProjectStatus status}) {
@@ -35,7 +35,7 @@ const $Project = _$ProjectTearOff();
 
 /// @nodoc
 mixin _$Project {
-  int get id => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
   ProjectStatus get status => throw _privateConstructorUsedError;
@@ -48,7 +48,7 @@ mixin _$Project {
 abstract class $ProjectCopyWith<$Res> {
   factory $ProjectCopyWith(Project value, $Res Function(Project) then) =
       _$ProjectCopyWithImpl<$Res>;
-  $Res call({int id, String title, String content, ProjectStatus status});
+  $Res call({String id, String title, String content, ProjectStatus status});
 }
 
 /// @nodoc
@@ -70,7 +70,7 @@ class _$ProjectCopyWithImpl<$Res> implements $ProjectCopyWith<$Res> {
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -92,7 +92,7 @@ abstract class _$ProjectCopyWith<$Res> implements $ProjectCopyWith<$Res> {
   factory _$ProjectCopyWith(_Project value, $Res Function(_Project) then) =
       __$ProjectCopyWithImpl<$Res>;
   @override
-  $Res call({int id, String title, String content, ProjectStatus status});
+  $Res call({String id, String title, String content, ProjectStatus status});
 }
 
 /// @nodoc
@@ -115,7 +115,7 @@ class __$ProjectCopyWithImpl<$Res> extends _$ProjectCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -141,7 +141,7 @@ class _$_Project implements _Project {
       required this.status});
 
   @override
-  final int id;
+  final String id;
   @override
   final String title;
   @override
@@ -185,13 +185,13 @@ class _$_Project implements _Project {
 
 abstract class _Project implements Project {
   const factory _Project(
-      {required int id,
+      {required String id,
       required String title,
       required String content,
       required ProjectStatus status}) = _$_Project;
 
   @override
-  int get id => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   @override
   String get title => throw _privateConstructorUsedError;
   @override

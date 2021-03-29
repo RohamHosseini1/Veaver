@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:hello_world/application/auth/auth_bloc.dart';
 import 'package:hello_world/application/auth/login_bloc.dart';
 import 'package:yeet/yeet.dart';
-import 'package:hello_world/common/VeaverColors.dart';
+import 'package:hello_world/common/veaver_colors.dart';
 
 class AuthView extends HookWidget {
   @override
@@ -12,8 +12,7 @@ class AuthView extends HookWidget {
     final authState = useProvider(authBlocProvider.state);
     final loginState = useProvider(loginBlocProvider.state);
     final loginBloc = useProvider(loginBlocProvider);
-    // ternary operator:
-    // condition ? ifitstrue : ifitsfalse
+
     return Scaffold(
       body: Column(
         children: [

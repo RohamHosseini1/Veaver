@@ -1,146 +1,206 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/domain/db/db_repo.dart';
 import 'package:hello_world/project_repository.dart';
-import 'package:riverpod/riverpod.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yeet/yeet.dart';
-
 import 'domain/project/project.dart';
+import 'package:hello_world/application/auth/auth_bloc.dart';
+import 'package:hello_world/application/auth/auth_state.dart';
+import 'package:hello_world/application/project/project_bloc.dart';
+import 'package:hello_world/domain/auth/auth_repo.dart';
+import 'package:hello_world/domain/project/project_repo.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends HookWidget {
   @override
   Widget build(BuildContext context) {
+    final authRepo = useProvider(authRepoProvider);
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Veaver'),
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton(
-                    child: Text('Dashboard'),
-                    onPressed: () {},
+      backgroundColor: Colors.grey[800],
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'In Progress',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
                   ),
-                  ElevatedButton(
-                    child: Text('Project Flow'),
-                    onPressed: () {},
+                ),
+                Container(
+                  child: InProgressWidget(),
+                  color: Colors.white70,
+                  height: 200,
+                  width: 800,
+                ),
+                Text(
+                  'To Do',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
                   ),
-                  ElevatedButton(
-                    child: Text('Content Calendar'),
-                    onPressed: () {},
+                ),
+                Container(
+                  child: ToDoWidget(),
+                  color: Colors.white70,
+                  height: 200,
+                  width: 800,
+                ),
+                Text(
+                  'Done',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
                   ),
-                  ElevatedButton(
-                    child: Text('Analytics'),
-                    onPressed: () {},
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  Column(
-                    children: [
-                      SizedBox(
-                        height: 50,
-                        width: 100,
-                        child: Text(
-                          'Event one',
-                        ),
-                      ),
-                      SizedBox(
-                        height: 50,
-                        width: 100,
-                        child: Text(
-                          'Event one',
-                        ),
-                      ),
-                      SizedBox(
-                        height: 50,
-                        width: 100,
-                        child: Text(
-                          'Event one',
-                        ),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    child: LibraryWidget(),
-                    color: Colors.grey,
-                    height: 200,
-                    width: 800,
-                  ),
-                ],
-              )
-            ],
+                ),
+                Container(
+                  child: DoneWidget(),
+                  color: Colors.white70,
+                  height: 200,
+                  width: 800,
+                ),
+              ],
+            ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
 
-class LibraryWidget extends StatelessWidget {
+class InProgressWidget extends HookWidget {
   @override
   Widget build(BuildContext context) {
+    final projectBloc = useProvider(projectBlocProvider);
+    final state = useProvider(projectBlocProvider.state);
+    print(state);
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ProjectWidget(1),
-          ProjectWidget(2),
-          ProjectWidget(3),
-          ProjectWidget(4),
-          ProjectWidget(5),
+          SizedBox(
+            width: 100,
+            child: TextField(
+              onChanged: (value) {
+                projectBloc.projectContentChanged(value);
+              },
+              decoration: InputDecoration(hintText: 'Add project'),
+            ),
+          ),
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {
+              projectBloc.addButtonPressed();
+            },
+          ),
+          SizedBox(height: 16),
+          if (state.project.isEmpty)
+            CircularProgressIndicator()
+          else
+            ...state.project.map((e) => ProjectWidget(project: e)).toList(),
         ],
       ),
     );
   }
 }
 
-// class FeedWidget extends HookWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     final state = useProvider(homePageBlocProvider.state);
+class ToDoWidget extends HookWidget {
+  @override
+  Widget build(BuildContext context) {
+    final projectBloc = useProvider(projectBlocProvider);
+    final state = useProvider(projectBlocProvider.state);
+    print(state);
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: 100,
+            child: TextField(
+              onChanged: (value) {
+                projectBloc.projectContentChanged(value);
+              },
+              decoration: InputDecoration(hintText: 'Add project'),
+            ),
+          ),
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {
+              projectBloc.addButtonPressed();
+            },
+          ),
+          SizedBox(height: 16),
+          if (state.project.isEmpty)
+            CircularProgressIndicator()
+          else
+            ...state.project.map((e) => ProjectWidget(project: e)).toList(),
+        ],
+      ),
+    );
+  }
+}
 
-//     return Row(
-//       crossAxisAlignment: CrossAxisAlignment.start,
-//       children: [
-//         SizedBox(height: 16),
-//         if (state.isLoading)
-//           CircularProgressIndicator()
-//         else
-//           Row(
-//             children:
-//                 state.projects.map((e) => ProjectWidget(Project(e))).toList(),
-//           ),
-//       ],
-//     );
-//   }
-// }
+class DoneWidget extends HookWidget {
+  @override
+  Widget build(BuildContext context) {
+    final projectBloc = useProvider(projectBlocProvider);
+    final state = useProvider(projectBlocProvider.state);
+    print(state);
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: 100,
+            child: TextField(
+              onChanged: (value) {
+                projectBloc.projectContentChanged(value);
+              },
+              decoration: InputDecoration(hintText: 'Add project'),
+            ),
+          ),
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {
+              projectBloc.addButtonPressed();
+            },
+          ),
+          SizedBox(height: 16),
+          if (state.project.isEmpty)
+            CircularProgressIndicator()
+          else
+            ...state.project.map((e) => ProjectWidget(project: e)).toList(),
+        ],
+      ),
+    );
+  }
+}
 
-class ProjectWidget extends StatelessWidget {
-  final int id;
+class ProjectWidget extends HookWidget {
+  final Project project;
 
-  ProjectWidget(this.id);
+  ProjectWidget({required this.project});
 
   @override
   Widget build(BuildContext context) {
-    final project = Project(
-      id: id,
-      content: 'project #$id content',
-      title: 'project #$id',
-      status: ProjectStatus.todo,
-    );
     return Padding(
       padding: const EdgeInsets.all(5),
       child: InkWell(
         onTap: () {
-          context.yeet('/project/$id');
+          context.yeet('/project/${project.id}');
         },
         child: Hero(
-          tag: 'project $id',
+          tag: 'project ${project.id}',
           child: Card(
             elevation: 5,
             child: Column(
@@ -151,7 +211,7 @@ class ProjectWidget extends StatelessWidget {
                     ),
                 SizedBox(height: 16),
                 Container(
-                  child: Text(project.title),
+                  child: Text(project.content),
                   color: Colors.white,
                 ),
                 Row(
@@ -182,57 +242,6 @@ class ProjectWidget extends StatelessWidget {
               ],
             ),
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class DatePickerWidget extends StatefulWidget {
-  @override
-  _DatePickerState createState() => _DatePickerState();
-}
-
-class _DatePickerState extends State<DatePickerWidget> {
-  DateTime selectedDate = DateTime.now();
-
-  _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: selectedDate,
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2025),
-    );
-    if (picked != null && picked != selectedDate)
-      setState(() {
-        selectedDate = picked;
-      });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Text(
-              "${selectedDate.toLocal()}".split(' ')[0],
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: 5.0,
-            ),
-            RaisedButton(
-              onPressed: () => _selectDate(context),
-              child: Text(
-                'Select date',
-                style:
-                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-              ),
-              color: Colors.greenAccent,
-            ),
-          ],
         ),
       ),
     );

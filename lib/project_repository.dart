@@ -10,7 +10,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yeet/yeet.dart';
 import 'package:provider/provider.dart';
-import 'package:hello_world/MockAuthRepository.dart';
+import 'package:hello_world/mock_auth_repository.dart';
 
 import 'domain/project/project.dart';
 
@@ -35,10 +35,10 @@ enum DoneStatus {
 
 abstract class ProjectRepository {
   Future<List<Project>> getAllProjects();
-  Stream<List<Project>> ShowAllProjects();
-  Future<bool> Done(int id);
-  Future<bool> Pause(int id);
-  Future<bool> Delete(int id);
+  Stream<List<Project>> showAllProjects();
+  Future<bool> done(int id);
+  Future<bool> pause(int id);
+  Future<bool> delete(int id);
 }
 
 abstract class MockProjectRepository implements ProjectRepository {

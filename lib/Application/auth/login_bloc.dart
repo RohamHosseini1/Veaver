@@ -1,6 +1,5 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:hello_world/application/auth/auth_bloc.dart';
 import 'package:hello_world/domain/auth/auth_repo.dart';
 
 import 'login_state.dart';

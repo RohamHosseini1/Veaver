@@ -1,8 +1,8 @@
-import 'package:hello_world/domain/auth/user.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:hello_world/domain/auth/auth_repo.dart';
 import 'auth_state.dart';
+import 'package:hello_world/domain/auth/user.dart';
 
 class AuthBloc extends StateNotifier<AuthState> {
   final AuthState authState;
