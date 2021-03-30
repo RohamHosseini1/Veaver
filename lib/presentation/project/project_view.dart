@@ -12,11 +12,19 @@ class ProjectView extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final projectBloc = useProvider(projectBlocProvider);
     final projectState = useProvider(projectBlocProvider.state);
     final project =
         projectState.project.where((element) => element.id == id).first;
+    final titleController = useTextEditingController(text: project.title);
+    final contentController = useTextEditingController(text: project.content);
     return GestureDetector(
         onTap: () {
+          projectBloc.projectSaved(
+            id,
+            titleController.text,
+            contentController.text,
+          );
           context.yeet();
         },
         child: Container(
@@ -28,22 +36,22 @@ class ProjectView extends HookWidget {
               child: Hero(
                 tag: 'project $id',
                 child: Card(
-                  child: Column(
-                    children: [
-                      TextField(
-                        decoration:
-                            InputDecoration(hintText: 'Enter Your Title'),
-                      ),
-                      Container(
-                        color: Colors.black,
-                        width: double.infinity,
-                        height: 3,
-                      ),
-                      TextField(
-                        decoration:
-                            InputDecoration(hintText: 'Type What you desire'),
-                      ),
-                    ],
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        TextField(
+                          controller: titleController,
+                          style: Theme.of(context).textTheme.headline1,
+                        ),
+                        TextField(
+                          controller: contentController,
+                          minLines: null,
+                          maxLines: null,
+                          decoration: InputDecoration(border: InputBorder.none),
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

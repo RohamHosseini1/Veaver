@@ -9,17 +9,24 @@ class ProjectsRepo {
 
   ProjectsRepo(this.firestore);
 
-  Future<void> project(
-    String authorName,
-    String authorId,
-    String content,
-    DateTime createdAt,
-  ) {
+  // TODO: for fuck's sake, handle errors!
+
+  Future<void> editProject(String id, String title, String content) async {
+    final project =
+        (await firestore.collection('projects').doc(id).get()).data();
+    project?['title'] = title;
+    project?['content'] = content;
+    return firestore.collection('projects').doc(id).set(project!);
+  }
+
+  Future<void> addProject(Project project) {
     return firestore.collection('projects').add({
-      'author_name': authorName,
-      'author_id': authorId,
-      'content': content,
-      'created_at': createdAt.toIso8601String(),
+      'author_name': project.authorName,
+      'author_id': project.authorId,
+      'title': project.title,
+      'content': project.content,
+      'created_at': project.createdAt.toIso8601String(),
+      'status': project.status.index,
     });
   }
 
@@ -32,9 +39,12 @@ class ProjectsRepo {
           .map((snapshot) => snapshot.docs
               .map((doc) => Project(
                     id: doc.id,
-                    title: '',
+                    title: doc['title'],
                     content: doc['content'],
-                    status: ProjectStatus.todo,
+                    status: ProjectStatus.values[doc['status']],
+                    authorId: doc['author_id'],
+                    authorName: doc['author_name'],
+                    createdAt: DateTime.parse(doc['created_at']),
                   ))
               .toList());
     } catch (e) {

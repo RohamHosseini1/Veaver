@@ -17,15 +17,21 @@ class _$ProjectTearOff {
   const _$ProjectTearOff();
 
   _Project call(
-      {required String id,
+      {String? id,
       required String title,
       required String content,
-      required ProjectStatus status}) {
+      required ProjectStatus status,
+      required String authorName,
+      required String authorId,
+      required DateTime createdAt}) {
     return _Project(
       id: id,
       title: title,
       content: content,
       status: status,
+      authorName: authorName,
+      authorId: authorId,
+      createdAt: createdAt,
     );
   }
 }
@@ -35,10 +41,13 @@ const $Project = _$ProjectTearOff();
 
 /// @nodoc
 mixin _$Project {
-  String get id => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
   ProjectStatus get status => throw _privateConstructorUsedError;
+  String get authorName => throw _privateConstructorUsedError;
+  String get authorId => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProjectCopyWith<Project> get copyWith => throw _privateConstructorUsedError;
@@ -48,7 +57,14 @@ mixin _$Project {
 abstract class $ProjectCopyWith<$Res> {
   factory $ProjectCopyWith(Project value, $Res Function(Project) then) =
       _$ProjectCopyWithImpl<$Res>;
-  $Res call({String id, String title, String content, ProjectStatus status});
+  $Res call(
+      {String? id,
+      String title,
+      String content,
+      ProjectStatus status,
+      String authorName,
+      String authorId,
+      DateTime createdAt});
 }
 
 /// @nodoc
@@ -65,12 +81,15 @@ class _$ProjectCopyWithImpl<$Res> implements $ProjectCopyWith<$Res> {
     Object? title = freezed,
     Object? content = freezed,
     Object? status = freezed,
+    Object? authorName = freezed,
+    Object? authorId = freezed,
+    Object? createdAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -83,6 +102,18 @@ class _$ProjectCopyWithImpl<$Res> implements $ProjectCopyWith<$Res> {
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as ProjectStatus,
+      authorName: authorName == freezed
+          ? _value.authorName
+          : authorName // ignore: cast_nullable_to_non_nullable
+              as String,
+      authorId: authorId == freezed
+          ? _value.authorId
+          : authorId // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: createdAt == freezed
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -92,7 +123,14 @@ abstract class _$ProjectCopyWith<$Res> implements $ProjectCopyWith<$Res> {
   factory _$ProjectCopyWith(_Project value, $Res Function(_Project) then) =
       __$ProjectCopyWithImpl<$Res>;
   @override
-  $Res call({String id, String title, String content, ProjectStatus status});
+  $Res call(
+      {String? id,
+      String title,
+      String content,
+      ProjectStatus status,
+      String authorName,
+      String authorId,
+      DateTime createdAt});
 }
 
 /// @nodoc
@@ -110,12 +148,15 @@ class __$ProjectCopyWithImpl<$Res> extends _$ProjectCopyWithImpl<$Res>
     Object? title = freezed,
     Object? content = freezed,
     Object? status = freezed,
+    Object? authorName = freezed,
+    Object? authorId = freezed,
+    Object? createdAt = freezed,
   }) {
     return _then(_Project(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -128,6 +169,18 @@ class __$ProjectCopyWithImpl<$Res> extends _$ProjectCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as ProjectStatus,
+      authorName: authorName == freezed
+          ? _value.authorName
+          : authorName // ignore: cast_nullable_to_non_nullable
+              as String,
+      authorId: authorId == freezed
+          ? _value.authorId
+          : authorId // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: createdAt == freezed
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -135,23 +188,32 @@ class __$ProjectCopyWithImpl<$Res> extends _$ProjectCopyWithImpl<$Res>
 /// @nodoc
 class _$_Project implements _Project {
   const _$_Project(
-      {required this.id,
+      {this.id,
       required this.title,
       required this.content,
-      required this.status});
+      required this.status,
+      required this.authorName,
+      required this.authorId,
+      required this.createdAt});
 
   @override
-  final String id;
+  final String? id;
   @override
   final String title;
   @override
   final String content;
   @override
   final ProjectStatus status;
+  @override
+  final String authorName;
+  @override
+  final String authorId;
+  @override
+  final DateTime createdAt;
 
   @override
   String toString() {
-    return 'Project(id: $id, title: $title, content: $content, status: $status)';
+    return 'Project(id: $id, title: $title, content: $content, status: $status, authorName: $authorName, authorId: $authorId, createdAt: $createdAt)';
   }
 
   @override
@@ -166,7 +228,16 @@ class _$_Project implements _Project {
                 const DeepCollectionEquality()
                     .equals(other.content, content)) &&
             (identical(other.status, status) ||
-                const DeepCollectionEquality().equals(other.status, status)));
+                const DeepCollectionEquality().equals(other.status, status)) &&
+            (identical(other.authorName, authorName) ||
+                const DeepCollectionEquality()
+                    .equals(other.authorName, authorName)) &&
+            (identical(other.authorId, authorId) ||
+                const DeepCollectionEquality()
+                    .equals(other.authorId, authorId)) &&
+            (identical(other.createdAt, createdAt) ||
+                const DeepCollectionEquality()
+                    .equals(other.createdAt, createdAt)));
   }
 
   @override
@@ -175,7 +246,10 @@ class _$_Project implements _Project {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(content) ^
-      const DeepCollectionEquality().hash(status);
+      const DeepCollectionEquality().hash(status) ^
+      const DeepCollectionEquality().hash(authorName) ^
+      const DeepCollectionEquality().hash(authorId) ^
+      const DeepCollectionEquality().hash(createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -185,19 +259,28 @@ class _$_Project implements _Project {
 
 abstract class _Project implements Project {
   const factory _Project(
-      {required String id,
+      {String? id,
       required String title,
       required String content,
-      required ProjectStatus status}) = _$_Project;
+      required ProjectStatus status,
+      required String authorName,
+      required String authorId,
+      required DateTime createdAt}) = _$_Project;
 
   @override
-  String get id => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
   @override
   String get title => throw _privateConstructorUsedError;
   @override
   String get content => throw _privateConstructorUsedError;
   @override
   ProjectStatus get status => throw _privateConstructorUsedError;
+  @override
+  String get authorName => throw _privateConstructorUsedError;
+  @override
+  String get authorId => throw _privateConstructorUsedError;
+  @override
+  DateTime get createdAt => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ProjectCopyWith<_Project> get copyWith =>

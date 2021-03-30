@@ -9,13 +9,23 @@ class ProjectBloc extends StateNotifier<ProjectState> {
   ProjectBloc(List<Project> project, this.projectsRepo)
       : super(ProjectState(project: project, newProject: ''));
 
+  void projectSaved(String id, String title, String content) {
+    projectsRepo.editProject(id, title, content);
+  }
+
   void projectContentChanged(String content) {
     state = state.copyWith(newProject: content);
   }
 
-  void addButtonPressed() {
-    projectsRepo.project(
-        'Roham', 'G3UdIicOBIZX8V2iWKXS', state.newProject, DateTime.now());
+  void addButtonPressed(ProjectStatus status) {
+    projectsRepo.addProject(Project(
+      title: state.newProject,
+      content: '',
+      status: status,
+      authorName: 'Roham',
+      authorId: 'G3UdIicOBIZX8V2iWKXS',
+      createdAt: DateTime.now(),
+    ));
   }
 
   void projectButtonPressed() {}

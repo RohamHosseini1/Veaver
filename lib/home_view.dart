@@ -32,7 +32,7 @@ class HomeView extends HookWidget {
                   ),
                 ),
                 Container(
-                  child: InProgressWidget(),
+                  child: ProjectRowWidget(ProjectStatus.doing),
                   color: Colors.white70,
                   height: 200,
                   width: 800,
@@ -45,7 +45,7 @@ class HomeView extends HookWidget {
                   ),
                 ),
                 Container(
-                  child: ToDoWidget(),
+                  child: ProjectRowWidget(ProjectStatus.todo),
                   color: Colors.white70,
                   height: 200,
                   width: 800,
@@ -58,7 +58,7 @@ class HomeView extends HookWidget {
                   ),
                 ),
                 Container(
-                  child: DoneWidget(),
+                  child: ProjectRowWidget(ProjectStatus.done),
                   color: Colors.white70,
                   height: 200,
                   width: 800,
@@ -72,88 +72,17 @@ class HomeView extends HookWidget {
   }
 }
 
-class InProgressWidget extends HookWidget {
-  @override
-  Widget build(BuildContext context) {
-    final projectBloc = useProvider(projectBlocProvider);
-    final state = useProvider(projectBlocProvider.state);
-    print(state);
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            width: 100,
-            child: TextField(
-              onChanged: (value) {
-                projectBloc.projectContentChanged(value);
-              },
-              decoration: InputDecoration(hintText: 'Add project'),
-            ),
-          ),
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () {
-              projectBloc.addButtonPressed();
-            },
-          ),
-          SizedBox(height: 16),
-          if (state.project.isEmpty)
-            CircularProgressIndicator()
-          else
-            ...state.project.map((e) => ProjectWidget(project: e)).toList(),
-        ],
-      ),
-    );
-  }
-}
+class ProjectRowWidget extends HookWidget {
+  final ProjectStatus status;
 
-class ToDoWidget extends HookWidget {
-  @override
-  Widget build(BuildContext context) {
-    final projectBloc = useProvider(projectBlocProvider);
-    final state = useProvider(projectBlocProvider.state);
-    print(state);
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            width: 100,
-            child: TextField(
-              onChanged: (value) {
-                projectBloc.projectContentChanged(value);
-              },
-              decoration: InputDecoration(hintText: 'Add project'),
-            ),
-          ),
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () {
-              projectBloc.addButtonPressed();
-            },
-          ),
-          SizedBox(height: 16),
-          if (state.project.isEmpty)
-            CircularProgressIndicator()
-          else
-            ...state.project.map((e) => ProjectWidget(project: e)).toList(),
-        ],
-      ),
-    );
-  }
-}
+  ProjectRowWidget(this.status);
 
-class DoneWidget extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final projectBloc = useProvider(projectBlocProvider);
     final state = useProvider(projectBlocProvider.state);
     print(state);
+    final projects = state.project.where((element) => element.status == status);
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
@@ -172,14 +101,14 @@ class DoneWidget extends HookWidget {
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () {
-              projectBloc.addButtonPressed();
+              projectBloc.addButtonPressed(status);
             },
           ),
           SizedBox(height: 16),
           if (state.project.isEmpty)
             CircularProgressIndicator()
           else
-            ...state.project.map((e) => ProjectWidget(project: e)).toList(),
+            ...projects.map((e) => ProjectWidget(project: e)).toList(),
         ],
       ),
     );
@@ -211,7 +140,7 @@ class ProjectWidget extends HookWidget {
                     ),
                 SizedBox(height: 16),
                 Container(
-                  child: Text(project.content),
+                  child: Text(project.title),
                   color: Colors.white,
                 ),
                 Row(
