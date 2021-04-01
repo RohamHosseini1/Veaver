@@ -44,6 +44,10 @@ dependencies:
   email_validator: ^2.0.1
   hive: ^2.0.0
   cloud_firestore: ^1.0.2
+  flutter_markdown: ^0.6.1
+  markdown_editable_textinput: ^1.0.2
+
+
 
 
 

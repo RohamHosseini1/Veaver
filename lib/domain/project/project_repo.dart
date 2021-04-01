@@ -11,6 +11,13 @@ class ProjectsRepo {
 
   // TODO: for fuck's sake, handle errors!
 
+  Future<void> editStatus(String id, ProjectStatus status) async {
+    final project =
+        (await firestore.collection('projects').doc(id).get()).data();
+    project?['status'] = status.index;
+    return firestore.collection('projects').doc(id).set(project!);
+  }
+
   Future<void> editProject(String id, String title, String content) async {
     final project =
         (await firestore.collection('projects').doc(id).get()).data();

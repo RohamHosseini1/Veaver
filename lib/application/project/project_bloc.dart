@@ -13,6 +13,10 @@ class ProjectBloc extends StateNotifier<ProjectState> {
     projectsRepo.editProject(id, title, content);
   }
 
+  void projectStatusChanged(String id, ProjectStatus status) {
+    projectsRepo.editStatus(id, status);
+  }
+
   void projectContentChanged(String content) {
     state = state.copyWith(newProject: content);
   }
